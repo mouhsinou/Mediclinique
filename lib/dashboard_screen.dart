@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'DossiersPage.dart';
+import 'medecins.dart';
 
 void main() {
   runApp(const MedicliniquApp());
@@ -63,20 +65,18 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Profil - Fonctionnalité à venir'),
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DossiersPage()),
               );
             },
           ),
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Notifications - Fonctionnalité à venir'),
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MedecinsPage()),
               );
             },
           ),
@@ -368,9 +368,26 @@ class AccueilPage extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$title - Fonctionnalité à venir')),
-          );
+          if (title == 'Rendez-vous') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RendezVousPage()),
+            );
+          } else if (title == 'Dossiers médicaux') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const DossiersPage()),
+            );
+          } else if (title == 'Patients') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PatientsPage()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('$title - Fonctionnalité à venir')),
+            );
+          }
         },
         borderRadius: BorderRadius.circular(16),
         child: Padding(
